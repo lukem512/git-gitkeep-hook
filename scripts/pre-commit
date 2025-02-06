@@ -3,10 +3,11 @@
 # Filename of directories to walk
 filename="./directories.lst"
 
-echo "Reading directories from $filename"
-
 # Read directories from the file, line by line
 tr -d '\r' <"$filename" | while read -r line; do
   # Find all subdirectories and add a .gitkeep file if one doesn't exist
-  find "$line" -type d -printf '%p\n' -exec sh -c 'test -f "$1/.gitkeep" || touch "$1/.gitkeep"' sh {} ';'
+  # add -printf '%p\n' as an argument to find to print to terminal
+  find "$line" -type d -exec sh -c 'test -f "$1/.gitkeep" || touch "$1/.gitkeep"' sh {} ';'
 done
+
+# add -printf '%p\n' as an argument to find to print to terminal
