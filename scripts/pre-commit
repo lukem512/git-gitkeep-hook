@@ -10,4 +10,4 @@ tr -d '\r' <"$filename" | while read -r line; do
   find "$line" -type d -exec sh -c 'test -f "$1/.gitkeep" || touch "$1/.gitkeep"' sh {} ';'
 done
 
-# add -printf '%p\n' as an argument to find to print to terminal
+exit 0
