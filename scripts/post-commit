@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Filename of directories to walk
+filename="./directories.lst"
+
+echo "Reading directories from $filename"
+
+# Read directories from the file, line by line
+tr -d '\r' <"$filename" | while read -r line; do
+  # Find all subdirectories and remove a .gitkeep file if present
+  find "$line" -type d -printf '%p\n' -exec sh -c 'rm -f "$1/.gitkeep"' sh {} ';'
+done
